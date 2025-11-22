@@ -3,142 +3,340 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pixel2brands — Launching Soon</title>
+  <title>Pixel2brands — Where Creativity Meets Digital Growth.</title>
+
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Footer Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
   <style>
     :root{
       --bg-overlay: rgba(20,20,20,0.55);
       --muted: #bfc3c6;
       --neon: #c7ff00;
-      --max-width: 800px;
-    }
-    *{box-sizing:border-box}
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:Poppins,system-ui,Arial,Helvetica,sans-serif;
-      color:#eee;
-      overflow-x:hidden;
-      background:#0b0b0b;
+      --max-width: 1100px;
     }
 
-    /* Background Video / Image */
-    .video-wrap{
-      position:fixed;inset:0;z-index:-2;overflow:hidden;
-    }
-    .video-wrap video{
-      min-width:100%;min-height:100%;width:auto;height:auto;position:absolute;
-      top:50%;left:50%;transform:translate(-50%,-50%);
-      object-fit:cover;filter:grayscale(90%) contrast(110%);
-    }
-    .overlay{
-      position:fixed;inset:0;
-      background:linear-gradient(180deg, rgba(10,10,10,0.55), rgba(30,30,30,0.7));
-      z-index:-1;
-    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Poppins,system-ui,Arial,Helvetica,sans-serif;color:#eee;overflow-x:hidden}
+
+    .video-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden}
+    .video-wrap video{min-width:100%;min-height:100%;width:auto;height:auto;position:absolute;top:10%;left:10%;transform:translate(-50%,-50%);object-fit:cover;filter:grayscale(90%) contrast(110%)}
+    .overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(10,10,10,0.45), rgba(30,30,30,0.6));z-index:-1}
 
     @keyframes fadeInUp{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
     @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
 
-    .container{
-      max-width:var(--max-width);
-      margin:0 auto;
-      padding:40px 20px;
-      text-align:center;
+  /* --- Header --- */
+    header {
+      position: relative;
+      top: 0;
+      z-index: 999;
       display:flex;
-      flex-direction:column;
-      justify-content:center;
       align-items:center;
-      height:100%;
-      animation:fadeIn 1.5s ease-out;
+      justify-content:space-between;
+      padding:10px 20px;
+      max-width:calc(var(--max-width) + 40px);
+      margin:8px auto;
+      background: rgba(15,15,15,0.35);
+      backdrop-filter: blur(6px);
+      border-radius: 10px;
+      animation: fadeIn 1s ease-out;
     }
-    .logo img{
-      width:180px;height:auto;border-radius:12px;margin-bottom:20px;
-      animation:fadeIn 2s ease-out;
-    }
-    h1{
-      font-family:'Playfair Display',serif;
-      font-size:48px;
-      margin:0 0 16px;
-      color:#fff;
-      animation:fadeInUp 1.3s ease-out;
-    }
-    p.lead{
-      font-size:18px;color:var(--muted);max-width:600px;margin:0 auto 30px;
+
+    .logo img{width:160px;height:auto;border-radius:10px;}
+
+    nav {
+      display:flex;
+      align-items:center;
+      gap:18px;
       animation:fadeInUp 1.5s ease-out;
     }
-    .btn{
+    nav a{color:var(--muted);text-decoration:none;font-size:15px;padding:8px;transition:color .25s}
+    nav a:hover{color:var(--neon)}
+
+    .btn-explore{
       background:linear-gradient(180deg,var(--neon), #9cff00);
-      padding:12px 20px;
+      padding:10px 16px;
       border-radius:10px;
       border:none;
       color:#0b0b00;
       font-weight:700;
       cursor:pointer;
       box-shadow:0 6px 18px rgba(0,0,0,0.35);
-      transition:transform .25s,box-shadow .25s;
-      text-decoration:none;
-      display:inline-block;
-      margin-top:10px;
-      animation:fadeInUp 1.6s ease-out;
+      transition:transform .25s,box-shadow .25s
     }
-    .btn:hover{transform:translateY(-3px);box-shadow:0 12px 22px rgba(0,0,0,0.45)}
+    .btn-explore:hover{transform:translateY(-3px);box-shadow:0 12px 22px rgba(0,0,0,0.45)}
 
-    .contact-info{
-      margin-top:40px;
-      animation:fadeInUp 2s ease-out;
+    /* --- Mobile Menu --- */
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
-    .contact-info p{
-      font-size:15px;margin:6px 0;color:#ccc;
+
+    @media(max-width: 768px){
+      nav {
+        position: absolute;
+        top: 100%;
+        right: 10px;
+        background: rgba(20,20,20,0.95);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px 20px;
+        border-radius: 10px;
+        display: none;
+      }
+      nav.show {display: flex;}
+      nav a, .btn-explore {width: 100%; text-align: left;}
+      .menu-toggle {display: block;}
     }
-    .contact-info a{color:var(--neon);text-decoration:none;}
-    .contact-info a:hover{text-decoration:underline;}
-    .social-icons{
-      margin-top:20px;
-    }
-    .social-icons a{
-      display:inline-block;margin:0 12px;font-size:22px;color:#fff;transition:color 0.3s ease, transform 0.3s ease;
-    }
-    .social-icons a:hover{color:var(--neon);transform:scale(1.1);}
+
+
+       /* --- Hero --- */
+    .hero{max-width:var(--max-width);margin:80px auto 40px;padding:40px 28px;display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap}
+    .hero-text{max-width:640px;flex:1 1 300px;}
+    .eyebrow{color:var(--muted);margin-bottom:12px;animation:fadeInUp 1.3s ease-out}
+    h1{font-family:'Playfair Display', serif;font-size:64px;line-height:1.02;margin:0 0 18px;color:#fff;letter-spacing:-1px;animation:fadeInUp 1.4s ease-out}
+    p.lead{color:var(--muted);font-size:18px;margin:0 0 28px;max-width:620px;animation:fadeInUp 1.5s ease-out}
+
+    .cta-row{display:flex;gap:14px;animation:fadeInUp 1.6s ease-out; flex-wrap:wrap}
+    .btn{padding:12px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.07);font-weight:600;cursor:pointer;transition:transform .25s,box-shadow .25s}
+    .btn.secondary{background:transparent;color:#e9e9e9}
+    .btn.primary{background:var(--neon);color:#0b0b00;box-shadow:0 10px 30px rgba(199,255,0,0.08)}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.35)}
+
+    /* --- Chat --- */
+    .chat{position:fixed;right:22px;bottom:22px;background:var(--neon);width:56px;height:56px;border-radius:999px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,0.4);cursor:pointer;animation:fadeIn 2s ease-out}
+    .chat svg{width:26px;height:26px}
+
+    /* --- Services Section --- */
+    #Services{max-width:var(--max-width);margin:40px auto;padding:24px;animation:fadeInUp 1.8s ease-out;}
+    #Services h2{font-family:'Playfair Display',serif;margin-bottom:20px;color:#fff;text-align:center;}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+    .service-card{background:rgba(15,15,15,0.35);border-radius:12px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.35);transition:transform .3s ease;}
+    .service-card:hover{transform:translateY(-6px);}
+    .service-image{height:200px;background-size:cover;background-position:center;}
+    .service-content{padding:20px;text-align:left;}
+    .service-content h3{margin:0 0 10px;color:var(--neon);font-size:20px;}
+    .service-content p{margin:0;color:#ddd;font-size:15px;line-height:1.4;}
+
+    /* --- Clients Section --- */
+    #clients{max-width:var(--max-width);margin:40px auto;padding:32px;background:rgba(0,0,0,0.25);border-radius:12px;animation:fadeInUp 2s ease-out;}
+    #clients h3{font-family:'Playfair Display',serif;margin-bottom:16px;color:#fff;text-align:center;}
+    #clients p{color:var(--muted);font-size:16px;max-width:800px;margin:0 auto 24px;text-align:center;}
+    .clients-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:20px;}
+    .client-card{background:rgba(15,15,15,0.35);padding:20px;border-radius:12px;text-align:center;transition:transform .3s ease;box-shadow:0 6px 18px rgba(0,0,0,0.35);}
+    .client-card:hover{transform:translateY(-6px);}
+    .client-card img{width:80px;height:80px;object-fit:cover;border-radius:50%;margin-bottom:12px;}
+    .client-card h4{margin:8px 0;color:var(--neon);font-size:18px;}
+    .client-card p{margin:0;color:#ccc;font-size:14px;}
+
+    /* --- Footer --- */
+    footer {background: linear-gradient(180deg, rgba(15,15,15,0.7), rgba(28,46,28,0.9));padding:50px 40px;text-align:center;border-radius: 12px 12px 0 0;animation: fadeInUp 2s ease-out;margin-top: 60px;}
+    footer .footer-brand img {width: 150px;margin-bottom: 15px;border-radius: 10px;}
+    footer .footer-brand p {font-size: 14px;color: var(--muted);margin-bottom: 25px;}
+    footer .contact-info p {font-size: 15px;margin: 6px 0;color: #ccc;}
+    footer .contact-info a {color: var(--neon);text-decoration: none;}
+    footer .contact-info a:hover {text-decoration: underline;}
+    footer .social-icons {margin-top: 20px;}
+    footer .social-icons a {display: inline-block;margin: 0 12px;font-size: 22px;color: #fff;transition: color 0.3s ease, transform 0.3s ease;}
+    footer .social-icons a:hover {color: var(--neon);transform: scale(1.1);}
   </style>
 </head>
+
 <body>
 
-<!-- Optional Background Video -->
+
+<!-- Background Video -->
 <div class="video-wrap" aria-hidden="true">
   <video autoplay muted loop playsinline id="bgvid">
     <source src="https://www.dropbox.com/scl/fi/uwt2c08g349l6k93lz7nr/video.mp4?rlkey=9q7yzkirl36daklezq8h7ifmd&st=m2aj6cyj&raw=1" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
 </div>
 <div class="overlay"></div>
 
-<div class="container">
+  <!-- Header -->
+<header>
   <div class="logo">
     <img src="https://www.dropbox.com/scl/fi/eumow9efehlskog5utb2z/logo.png?rlkey=99ujxb07c9dw4jaujjyozahfz&st=upxib4j1&raw=1" alt="Pixel2brands Logo">
   </div>
-  <h1>We’re Launching Soon!</h1>
-  <p class="lead">Our new website is under construction. Stay tuned for something amazing!<br>Meanwhile, you can reach us below.</p>
-  <a href="https://wa.me/919166160099" class="btn" target="_blank">Contact Us</a>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <nav id="navMenu">
+    <a href="#for-business">About Us</a>
+    <a href="#clients">Working with </a>
+    <a href="#contact">Contact Us</a>
+    <button class="btn-explore" onclick="document.getElementById('Services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+  </nav>
+</header>
 
-  <div class="contact-info">
-    <p>Email: <a href="mailto:contact.pixel2brand@gmail.com">contact.pixel2brand@gmail.com</a></p>
-    <p>Phone: <a href="tel:+919166160099">+91 91661 60099</a></p>
-    <div class="social-icons">
-   
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <div class="eyebrow"></div>
+        <h1>Where Creativity Meets Digital Growth.</h1>
+        <p class="lead">Craft strategies and solutions that deliver real-world impact for your brand.</p>
+        <div class="cta-row">
+          <button class="btn primary" onclick="document.getElementById('Services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+          <button class="btn secondary" onclick="document.getElementById('for-business').scrollIntoView({behavior:'smooth'})">About Us</button>
+        </div>
+      </div>
+      <div style="flex:1;min-height:220px"></div>
+    </section>
+
+    <!-- Services -->
+    <section id="Services">
+      <h2>Services</h2>
+      <div class="services-grid">
+        
+        <!-- Card 1 -->
+        <div class="service-card">
+          <div class="service-image" style="background-image:url('https://www.dropbox.com/scl/fi/aq6k882e49t0rxlc63bal/Untitled_design111-removebg-preview-1.png?rlkey=s08c8iv2g6473n1y8jca6suoz&st=m7hci8yy&raw=1');"></div>
+          <div class="service-content">
+            <h3>Content Marketing</h3>
+            <p>Content marketing is a key service offered by Pixel2brand. It focuses on creating and distributing valuable, relevant, and consistent content to attract, engage, and retain a clearly defined audience.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card">
+          <div class="service-image" style="background-image:url('https://www.dropbox.com/scl/fi/p2hmio4se9zkao4zdm2cd/websitedesign-and-development.png?rlkey=u715fupqzig1jbtkjyazccaku&st=z8hpffqi&raw=1');"></div>
+
+          <div class="service-content">
+            <h3>Website Design & Development</h3>
+            <p>Website Design & Development is another crucial service offered by Pixel2brand. It focuses on building an effective online presence that is visually appealing, user-friendly, and optimized for conversions.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card">
+         <div class="service-image" style="background-image:url('https://www.dropbox.com/scl/fi/x2xeyoi99qoojhrrpmx3g/Social-Media-Marketing.png?rlkey=c07chyawts45n9nc6wigva98i&st=nfhzaoyy&raw=1');"></div>
+
+          <div class="service-content">
+            <h3>Social Media Marketing</h3>
+            <p>Social Media Marketing (SMM) is a core service provided by Pixel2brand, focused on promoting brands, products, or services across social media platforms to increase engagement, visibility, and sales.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Business Section -->
+    <section id="for-business" style="max-width:var(--max-width);margin:28px auto;padding:24px;background:rgba(0,0,0,0.25);border-radius:12px;">
+      <h3>About Us</h3>
+<p style="color:var(--muted)">At PixelToBrand, we are passionate about helping businesses grow and shine in the digital world. Our mission is simple: to transform ideas into impactful online experiences that drive engagement, growth, and results.</p>
+
+<p style="color:var(--muted)">We specialize in complete content marketing, crafting strategies and stories that resonate with your audience and amplify your brand’s voice. Our team also excels in website design and development, building visually stunning, user-friendly websites that not only look great but perform seamlessly. On top of that, our social media marketing expertise ensures your brand reaches the right people, at the right time, with meaningful engagement that converts.</p>
+
+<p style="color:var(--muted)">At PixelToBrand, we believe every brand has a story to tell. Our goal is to bring that story to life with creativity, technology, and strategy – turning your digital presence into a powerful growth engine.</p>
+
+ </section>
+
+<section id="for-business" style="max-width:var(--max-width);margin:28px auto;padding:24px;background:rgba(0,0,0,0.25);border-radius:12px;">
+<h3>Why PixelToBrand?</h3>
+      <p style="color:var(--muted)">At PixelToBrand, we don’t just provide services—we deliver results. We combine creativity, strategy, and technology to help your brand stand out in the crowded digital world.</p>
+<p style="color:var(--muted)">Complete Solutions : From content marketing to website design and social media, we handle it all under one roof.</p>
+<p style="color:var(--muted)">Customized Approach : Every brand is unique, and we craft strategies tailored to your goals.</p>
+<p style="color:var(--muted)">Results-Driven : Our focus is on growing your audience, boosting engagement, and driving measurable results.</p>
+<p style="color:var(--muted)">Expert Team : A dedicated team of professionals ensures your brand looks great, performs flawlessly, and reaches the right audience.</p>
+
+
+
+    </section>
+
+    <!-- Working With Section -->
+    <section id="clients">
+  <h3>Working With</h3>
+  <p>We collaborate with forward-thinking clients to transform ideas into impactful results.</p>
+  <div class="clients-grid">
+
+    <div class="client-card">
+      <a href="https://www.instagram.com/styfle.in" target="_blank">
+        <img src="https://www.dropbox.com/scl/fi/btxjczd2b2e7midn62cyi/styfle.png?rlkey=ceymcvwqjxlnu1pg5ef3v5h1f&st=1ymnke7b&raw=1" alt="Styfle Clothing">
+      </a>
+      <h4>Styfle Clothing</h4>
+      <p>Clothing brand</p>
     </div>
+
+    <div class="client-card">
+      <a href="https://www.instagram.com/atozmobile_ajg" target="_blank">
+        <img src="https://www.dropbox.com/scl/fi/xp3gam6wrhhui16fla115/atoz.png?rlkey=iurathk5oqiqhe5esblaqw72l&st=w8uq7f2t&raw=1" alt="Atoz Mobile">
+
+      </a>
+      <h4>AtoZ Mobile</h4>
+      <p>Mobile phone store</p>
+    </div>
+
+    <div class="client-card">
+      <a href="https://www.instagram.com/vaarshika_trends" target="_blank">
+        <img src="https://www.dropbox.com/scl/fi/b6mnjueeynid87pokqjlp/vaarshikatrends.png?rlkey=sbpqm25t66aaj4fytxkyw3yne&st=dtmrkonl&raw=1" alt="Vaarshika Trends">
+
+       </a>
+      <h4>Vaarshika Trends</h4>
+      <p>Fasion Designing </p>
+    </div>
+
+    <div class="client-card">
+      <a href="https://www.instagram.com/sagar.mobile_" target="_blank">
+        <img src="https://www.dropbox.com/scl/fi/mo2tq3nyj53c3ulvrc689/SAGAR-MOBILE.png?rlkey=yy41nglzfeboa30arb4o3s3aj&st=lxu5xlxu&raw=1" alt="Sagar Mobile">
+
+      </a>
+      <h4>Sagar Mobile</h4>
+      <p>Mobile Phone Store</p>
+    </div>
+
   </div>
-</div>
+</section>
 
-<script>
-  const vid = document.getElementById('bgvid');
-  document.addEventListener('visibilitychange', ()=>{ document.hidden ? vid.pause() : vid.play(); });
-</script>
+  </main>
 
+   <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-brand">
+      <img src="https://www.dropbox.com/scl/fi/eumow9efehlskog5utb2z/logo.png?rlkey=99ujxb07c9dw4jaujjyozahfz&st=upxib4j1&raw=1" alt="Pixel2brands Logo">
+      <p>© 2025 Pixel2brand Pvt. Ltd. All rights reserved.</p>
+    </div>
+    <div class="contact-info">
+      <p>Email: <a href="mailto:contact.pixel2brand@gmail.com">contact.pixel2brand@gmail.com</a></p>
+      <p>Phone: <a href="tel:+919166160099">+91 91661 60099</a></p>
+      <p>Address: Shahpura, Rajasthan, India</p>
+    </div>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/pixel2brand" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/pixel-to-brand-b414a8387?utm_source=share&utm_campaign=share_via&utm_content=profile&utm" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </footer>
+
+
+
+  <!-- Chat Button -->
+  <div class="chat" onclick="openChat()">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 11.5a8.5 8.5 0 1 1-4.2-7.1" stroke="#0b0b00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 17l-1.5 3L11 18" stroke="#0b0b00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+
+  <script>
+    function openChat(){
+      window.open("https://wa.me/919166160099", "_blank");
+    }
+    const vid = document.getElementById('bgvid');
+    document.addEventListener('visibilitychange', ()=>{ document.hidden ? vid.pause() : vid.play(); });
+
+    function toggleMenu(){
+      document.getElementById('navMenu').classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
-
-
 
